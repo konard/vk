@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-./delete-out-friend-request.sh
+# Initial run with friends limit management
+./manage-friends-limit.sh
 
 sleep 16
 
@@ -9,19 +10,16 @@ sleep 16
 
 sleep 16
 
-./accept-all-friend-requests-once.sh
-
+# Main loop with friends limit checks
 while :
 do
   sleep 600
 
-  ./delete-out-friend-request.sh
+  ./manage-friends-limit.sh
 
   sleep 600
 
   ./delete-first-deactivated-friend.sh
 
   sleep 600
-
-  ./accept-all-friend-requests-once.sh
 done
