@@ -19,30 +19,47 @@ CHECK GITIGNORE FILE.
    ```
    sudo apt install curl jq
    ```
-3. Install npm:
+3. Install Node.js and npm (version 14 or higher is required):
+
+   **Option A (Recommended): Using nvm**
+   ```bash
+   # Install nvm
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+   # Restart your terminal or run:
+   source ~/.bashrc
+   # Install latest LTS version of Node.js
+   nvm install --lts
+   nvm use --lts
    ```
-   sudo apt install npm
+
+   **Option B: Using NodeSource repository**
+   ```bash
+   # Install Node.js 20.x (LTS)
+   curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+   sudo apt-get install -y nodejs
    ```
-   or using [nvm](https://github.com/nvm-sh/nvm).
+
+   **Note:** Do NOT use `sudo apt install npm` as it installs Node.js v10.19.0, which is too old for chromedriver (requires Node.js >= 14).
 4. Install selenium (for automatic token refreshing):
 
-   Without nvm:
-   ```
-   sudo npm install -g selenium-side-runner
-   ```
-   With nvm:
-   ```
+   If using nvm (Option A):
+   ```bash
    npm install -g selenium-side-runner
    ```
+   If using NodeSource (Option B):
+   ```bash
+   sudo npm install -g selenium-side-runner
+   ```
+
 5. Install Chrome driver (other browsers may be also used):
 
-   Without nvm:
-   ```
-   sudo npm install -g chromedriver --unsafe-perm=true --allow-root
-   ```
-   With nvm:
-   ```
+   If using nvm (Option A):
+   ```bash
    npm install -g chromedriver --unsafe-perm=true --allow-root
+   ```
+   If using NodeSource (Option B):
+   ```bash
+   sudo npm install -g chromedriver --unsafe-perm=true --allow-root
    ```
    Execute this command again for a new major version of the Chrome browser.
 
