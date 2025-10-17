@@ -11,6 +11,12 @@ ERROR_MESSAGE=$(echo "$QUERY_RESULT" | jq .error.error_msg | tr -d '"')
 echo "$QUERY_RESULT" | jq
 
 if [ "$ERROR_MESSAGE" = "$TOKEN_EXPIRED_ERROR_MESSAGE" ] || [ "$ERROR_MESSAGE" = "$TOKEN_WAS_GIVEN_TO_ANOTHER_IP_ERROR_MESSAGE" ] || [ "$ERROR_MESSAGE" = "$NO_TOKEN_PASSED_ERROR_MESSAGE" ]; then
+  # Check if Google Chrome is installed, install if needed
+  if ! command -v google-chrome &> /dev/null; then
+    echo "Google Chrome not found. Installing..."
+    ./install-google-chrome.sh
+  fi
+
   # Get new access token
   EMAIL=`cat email`
   PASS=`cat pass`
